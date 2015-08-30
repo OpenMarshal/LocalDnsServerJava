@@ -11,6 +11,12 @@ Indeed, if a software can't obtain the IP of it's server, so it will not be able
 
 While the program is running, it will use the "filter.txt" file to know which domain to filter and which one to allow. It shows too (in diagnosis mode [default mode]) the domains requested by your computer, allowing you to see clearly the domains reached.
 
+In the folder "sample" in this repo, you can find :
+* The .jar used to run the program.
+* An example of the .txt used to filter the DNS requests.
+* The .vbs file used by Windows to autorun the program at startup.
+* An example of the .cmd used by Windows to autorun the program at startup.
+
 # Installation
 
 The installation consists to change the DNS server which will be used by your operating system to send DNS requests.
@@ -85,4 +91,3 @@ cls
 So this way you don't need the file "autorunDescriptor.vbs" anymore.
 
 Copy this command file into "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup". It will automatically run the program on startup of the user session.
-

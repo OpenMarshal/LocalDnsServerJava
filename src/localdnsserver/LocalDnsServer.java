@@ -128,13 +128,13 @@ public class LocalDnsServer
             String lineSeparator = System.getProperty("line.separator");
             try(
                     BufferedWriter writer = new BufferedWriter(new FileWriter(filterFile));
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(LocalDnsServer.class.getResourceAsStream("localdnsserver.filter.txt")));
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(LocalDnsServer.class.getResourceAsStream("filter.txt")));
                 )
             {
                 writer.write(reader.lines().reduce("", (s1, s2) -> s1.length() > 0 ? s1 + lineSeparator + s2 : s2));
             }
             catch(IOException ex)
-            { }
+            { ex.printStackTrace(); }
         }
     }
 }

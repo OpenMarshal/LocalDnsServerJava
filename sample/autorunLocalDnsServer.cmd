@@ -1,7 +1,7 @@
 @echo off
 
-D:
-cd D:\Projects\java\LocalDnsServer\dist
+F:
+cd F:\LocalDnsServer
 wscript.exe "autorunDescriptor.vbs" "LocalDnsServer.jar"
 
 cls
