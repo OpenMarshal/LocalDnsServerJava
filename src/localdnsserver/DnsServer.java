@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package localdnsserver;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -28,16 +22,27 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Stream;
 
 /**
+ * This class represents the DNS server.
  *
- * @author Adrien
+ * @author Adrien Castex
  */
 public class DnsServer implements Runnable
 {
     public DnsServer()
-    { }
+    {
+        this.filteredAddrs = new ConcurrentLinkedQueue<>();
+    }
     
-    private Collection<String> filteredAddrs = new ConcurrentLinkedQueue<>();
+    // <editor-fold defaultstate="collapsed" desc="Fields">
+    private final Collection<String> filteredAddrs;
+    private InetAddress defaultAddress = null;
+    private int defaultPort = 53;
+    private boolean diagnosisMode = false;
+    private boolean blockAll = false;
+    private boolean stop = false;
+    // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="Static methods">
     public static byte[] convertIP(String ip)
     {
         Integer[] array = Stream.of(ip.split("\\."))
@@ -72,39 +77,30 @@ public class DnsServer implements Runnable
         }
         return url;
     }
-
-    private static int getUInt(byte value)
-    {
-        return value & 0x000000FF;
-    }
-    private static int getValue(byte[] datas, int index)
-    {
-        return (getUInt(datas[index]) << 8) | getUInt(datas[index + 1]);
-    }
+    // </editor-fold>
     
-    private InetAddress defaultAddress = null;
+    // <editor-fold defaultstate="collapsed" desc="Methods / Accessors">
     public void setDefaultAddress(String ip) throws UnknownHostException
     {
         this.defaultAddress = Inet4Address.getByAddress(convertIP(ip));
     }
     
-    private int defaultPort = 53;
     public void setDefaultPort(int port)
     {
         this.defaultPort = port;
     }
     
-    private boolean diagnosisMode = false;
     public void setDiagnosisMode(boolean value)
     {
         diagnosisMode = value;
     }
     
-    private boolean blockAll = false;
     public void setBlockAllMode(boolean value)
     {
         blockAll = value;
     }
+    
+    
     
     public void clearForbiddenDomainRegex()
     {
@@ -190,8 +186,6 @@ public class DnsServer implements Runnable
         }
     }
     
-    
-    private boolean stop = false;
     public void stop()
     {
         this.stop = true;
@@ -201,6 +195,7 @@ public class DnsServer implements Runnable
     {
         return new Thread(this);
     }
+    // </editor-fold>
 
     @Override
     public void run()
@@ -235,10 +230,9 @@ public class DnsServer implements Runnable
                     if(diagnosisMode)
                     {
                         if(!blocked)
-                            System.out.println("\u001B[37;40;1m >> " + domain);
+                            System.out.println(" >>> " + domain);
                         else
-                            System.out.println("\u001B[31;40;1m >> " + domain + " [BLOCKED]");
-                        System.out.print("\u001B[0m");
+                            System.out.println(" >X< " + domain + " [BLOCKED]");
                     }
 
                     if(!blocked)

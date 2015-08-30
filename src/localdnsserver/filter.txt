@@ -14,14 +14,14 @@
 # everything after the symbol on the same line     #
 # will be ignored.                                 #
 #                                                  #
-########                                    ########
+########+           +##########+           +########
 #                                                  #
 # www.chocolate.com                                #
 #                                                  #
 # This example blocks only :                       #
 #   * www.chocolate.com                            #
 #                                                  #
-########                                    ########
+########+                                  +########
 #                                                  #
 # *chocolate.com                                   #
 #                                                  #
@@ -31,7 +31,7 @@
 #   * www.good.chocolate.com                       #
 #   * etc...                                       #
 #                                                  #
-########                                    ########
+########+                                  +########
 #                                                  #
 # www.chocolates?.com                              #
 #                                                  #

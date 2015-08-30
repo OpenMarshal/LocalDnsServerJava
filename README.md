@@ -4,8 +4,8 @@ Local DNS Server to bring more control over the OS
 # Description
 
 This program allow the user to redirect the requests through this software to :
-* Monitor the requests (spot spywares, weird domains, etc)
-* Filter the requests
+* Monitor the DNS requests (spot spywares, weird domains, etc)
+* Filter the DNS requests
 
 Indeed, if a software can't obtain the IP of it's server, so it will not be able to send any request. But most of viruses use direct IP, no DNS requests, so this software will not protect from most of viruses but it will bring a better control over not trusted softwares like Google Chrome which can send private information to a server (this way you can spot this activity and block it).
 
@@ -84,5 +84,5 @@ cls
 
 So this way you don't need the file "autorunDescriptor.vbs" anymore.
 
-Copy this command file into "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup". It will automaticaly run the program on startup of the user session.
+Copy this command file into "C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup". It will automatically run the program on startup of the user session.
 

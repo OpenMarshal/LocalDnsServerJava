@@ -10,8 +10,7 @@ import java.net.SocketException;
 import java.util.Scanner;
 
 /**
- *
- * @author Adrien
+ * @author Adrien Castex
  */
 public class LocalDnsServer
 {
@@ -20,7 +19,7 @@ public class LocalDnsServer
         DnsServer server = new DnsServer();
         
         File filterFile = new File("filter.txt");
-        loadFile(filterFile);
+        createNewFilterFile(filterFile);
         
         server.setDiagnosisMode(true);
         server.addForbiddenDomainRegexFromFile(filterFile);
@@ -118,7 +117,11 @@ public class LocalDnsServer
         } while(!line.equals("exit"));
     }
     
-    private static void loadFile(File filterFile)
+    /**
+     * Creates a new filter file if it doesn't exist.
+     * @param filterFile File to create.
+     */
+    private static void createNewFilterFile(File filterFile)
     {
         if(!filterFile.exists())
         {
