@@ -50,6 +50,9 @@ Then, open a text editor with a file called "xxxxx.cmd" (with xxxxx, the name of
 ```cmd
 @echo off   :: remove command input to display
 
+:: We clear the DNS Cache
+ipconfig /flushdns
+
 :: We redirect the current location of the current program into 'pathOfTheFiles'
 cd pathOfTheFiles
 :: Execute 'LocalDnsServer.jar' located in 'pathOfTheFiles' in "ghost" mode, thanks to 'autorunDescriptor.vbs'.
@@ -65,6 +68,8 @@ Here is an example for the drive "D" :
 ```cmd
 @echo off
 
+ipconfig /flushdns
+
 :: The drive where pathOfTheFiles is. Don't forget the ':' after the letter.
 D:
 cd pathOfTheFiles
@@ -78,6 +83,8 @@ If you want the program to pop up instead of being hidden, you will just call th
 
 ```cmd
 @echo off
+
+ipconfig /flushdns
 
 D:
 cd pathOfTheFiles
